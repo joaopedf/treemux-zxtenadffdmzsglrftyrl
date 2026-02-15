@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
 import { SearchBar } from "@/components/search-bar";
 import { ListingCard } from "@/components/listing-card";
 import { Button } from "@/components/ui/button";
@@ -194,9 +195,31 @@ function HomeContent() {
           </div>
         )}
 
+        {/* Stats banner */}
+        {!queryParam && (
+          <section className="mt-16 mb-0">
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+              {[
+                { value: "12,847", label: "Active Listings" },
+                { value: "$2.3M", label: "Total Saved by Buyers" },
+                { value: "94%", label: "Deals Closed by AI" },
+                { value: "< 2min", label: "Avg Negotiation Time" },
+              ].map(({ value, label }) => (
+                <div
+                  key={label}
+                  className="rounded-xl border border-border/40 bg-card p-4 text-center"
+                >
+                  <div className="text-2xl font-bold text-primary">{value}</div>
+                  <div className="text-xs text-muted-foreground mt-1">{label}</div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* How it works */}
         {!queryParam && (
-          <section className="mt-20 mb-8">
+          <section className="mt-16 mb-8">
             <div className="text-center mb-10">
               <Badge variant="secondary" className="mb-3 font-medium">
                 How it works
@@ -270,6 +293,8 @@ function HomeContent() {
           </section>
         )}
       </main>
+
+      {!queryParam && <Footer />}
     </div>
   );
 }
