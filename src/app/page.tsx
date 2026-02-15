@@ -155,6 +155,31 @@ function HomeContent() {
           </div>
         )}
 
+        {/* Trending */}
+        {!queryParam && (
+          <div className="mb-8">
+            <div className="flex items-center gap-2 mb-3">
+              <TrendingUp className="h-4 w-4 text-primary" />
+              <h2 className="text-sm font-bold">Trending near you</h2>
+            </div>
+            <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+              {["MacBook Pro", "Standing desk", "Aeron chair", "Road bike", "Sony camera", "Nintendo Switch"].map(
+                (term) => (
+                  <button
+                    key={term}
+                    onClick={() => {
+                      window.location.href = `/?q=${encodeURIComponent(term)}`;
+                    }}
+                    className="whitespace-nowrap rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-xs font-medium text-primary hover:bg-primary/10 transition-colors"
+                  >
+                    {term}
+                  </button>
+                )
+              )}
+            </div>
+          </div>
+        )}
+
         {/* Category pills */}
         <div className="mb-6 flex flex-wrap gap-2">
           {categories.map((cat) => (

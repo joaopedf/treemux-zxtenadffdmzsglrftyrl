@@ -155,6 +155,45 @@ export default function NegotiationChat() {
         </div>
       </div>
 
+      {/* Price tracker bar */}
+      {hasStarted && (
+        <div className="border-b border-border/40 bg-gradient-to-r from-primary/5 via-transparent to-primary/5">
+          <div className="mx-auto max-w-3xl px-4 py-2.5">
+            <div className="flex items-center justify-between text-xs">
+              <div className="flex items-center gap-4">
+                <div>
+                  <span className="text-muted-foreground">Listed:</span>{" "}
+                  <span className="font-bold">${listing.price}</span>
+                </div>
+                {listing.originalPrice && (
+                  <div>
+                    <span className="text-muted-foreground">Retail:</span>{" "}
+                    <span className="font-medium text-muted-foreground line-through">
+                      ${listing.originalPrice}
+                    </span>
+                  </div>
+                )}
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="h-1.5 w-20 rounded-full bg-secondary overflow-hidden">
+                  <div
+                    className="h-full rounded-full bg-primary transition-all duration-500"
+                    style={{ width: `${Math.min(100, (messages.length / 8) * 100)}%` }}
+                  />
+                </div>
+                <span className="text-muted-foreground">
+                  {messages.length < 4
+                    ? "Opening"
+                    : messages.length < 8
+                    ? "Negotiating"
+                    : "Closing"}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Chat area */}
       <div className="flex-1 overflow-hidden">
         <ScrollArea className="h-full" ref={scrollRef}>
